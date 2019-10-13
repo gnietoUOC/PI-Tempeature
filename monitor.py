@@ -23,14 +23,9 @@ class MQTTControl:
 		data = payload.split(",")
 
 		try:
-#			print(now,data[1])
-#			print(datetime.strptime(now,"%Y-%m-%d %H:%M:%S.%f"))
-#			print(datetime.strptime(data[1],"%Y-%m-%d %H:%M:%S.%f"))
-#			print(datetime.strptime(now))
-#			delta = datetime.strptime(now,"%Y-%m-%d %H:%M:%S.%f")-datetime.strptime(data[1],"%Y-%m-%d %H:%M:%S.%f") 
 			delta = now-datetime.strptime(data[1],"%Y-%m-%d %H:%M:%S.%f") 
 			
-			print ("{}\t{} ({}) - {}:{}".format(datetime.now(),data[1],delta,topic,data[0]))
+			print ("{} -> {} ({}ms) - {}:{}".format(data[1],datetime.now(),delta.microseconds/1000,topic,data[0]))
 		except:
 			print("Oh!")
 
