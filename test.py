@@ -24,7 +24,7 @@ def main():
 	while(1):
 		cpu = CPUTemperature()
 		temp = cpu.temperature
-		print("{}\n".format(cpu.temperature))
+		print("{}\n".format(temp))
 		control.send("GNFPiTemp",temp);
 		time.sleep(1)
 			
