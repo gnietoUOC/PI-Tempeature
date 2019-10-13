@@ -1,5 +1,7 @@
 import sys
 import time
+#import json
+from datetime import datetime
 
 import paho.mqtt.client as mqtt
 
@@ -15,9 +17,22 @@ class MQTTControl:
 		self.mqttc.subscribe(topic)
 
 	def read(self,client,userdata,message):
+		now = datetime.now()
 		topic = str(message.topic)
-		message = str(message.payload.decode("UTF-8"))
-		print ("{}:{}".format(topic,message))
+		payload = str(message.payload.decode("UTF-8"))
+		data = payload.split(",")
+
+		try:
+#			print(now,data[1])
+#			print(datetime.strptime(now,"%Y-%m-%d %H:%M:%S.%f"))
+#			print(datetime.strptime(data[1],"%Y-%m-%d %H:%M:%S.%f"))
+#			print(datetime.strptime(now))
+#			delta = datetime.strptime(now,"%Y-%m-%d %H:%M:%S.%f")-datetime.strptime(data[1],"%Y-%m-%d %H:%M:%S.%f") 
+			delta = now-datetime.strptime(data[1],"%Y-%m-%d %H:%M:%S.%f") 
+			
+			print ("{}\t{} ({}) - {}:{}".format(datetime.now(),data[1],delta,topic,data[0]))
+		except:
+			print("Oh!")
 
 	def __del__(self):
 		self.mqttc.disconnect()
