@@ -1,6 +1,5 @@
 import sys
 import time
-#import json
 from datetime import datetime
 
 import paho.mqtt.client as mqtt
@@ -37,6 +36,7 @@ def main():
 
 	control = MQTTControl("ubuntu1904")
 	control.listen("GNFPiTemp")
+	control.listen("GNFPiLoad")
 
 	while(1):
 		time.sleep(10)
